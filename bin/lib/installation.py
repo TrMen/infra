@@ -469,9 +469,9 @@ class GitHubInstallable(Installable):
         self.method = self.config_get("method", "archive")
         self.decompress_flag = self.config_get("decompress_flag", "z")
         self.strip = False
-        self.subdir = os.path.join('libs', self.config_get("subdir", last_context))
+        self.subdir = self.config_get('subdir', os.path.join('libs', self.config_get("subdir", last_context)))
         self.target_prefix = self.config_get("target_prefix", "")
-        self.branch_name = self.target_prefix + self.target_name
+        self.branch_name = self.config_get('branch_name', self.target_prefix + self.target_name)
         self.install_path = self.config_get('path_name', os.path.join(self.subdir, self.branch_name))
         if self.repo == "":
             raise RuntimeError('Requires repo')

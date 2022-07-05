@@ -1,0 +1,20 @@
+compilers:
+  jakt:
+    type: github
+    method: nightlyclone
+    repo: SerenityOS/jakt
+    check_file: Cargo.toml
+    check_exe: jakt-selfhost --version
+    path_name: jakt-{name}
+    subdir: ""
+    depends:
+      - compilers/rust/newer 1.62.0
+    after_stage_script:
+      - export RUSTC=/opt/compiler-explorer/rust-1.62.0/bin/rustc
+      - export CARGO=/opt/compiler-explorer/rust-1.62.0/bin/cargo
+      - $CARGO build --release
+      - $CARGO run --release selfhost/main.jakt
+      - mv target/release/jakt jakt-rs
+      - mv build/main jakt-selfhost
+    targets:
+      - trunk
