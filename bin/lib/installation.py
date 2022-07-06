@@ -955,8 +955,7 @@ class RustInstallable(Installable):
         
         arch_std_prefix = f'rust-std-{self.target_name}-'
         suffix = '.tar.gz'
-        architectures = [artifact[len(arch_std_prefix):-len(suffix)] for artifact in
-                         s3_available_rust_artifacts(arch_std_prefix)]
+        architectures = ['x86_64-unknown-linux-gnu']
         self.info(f"Installing for these architectures: {', '.join(architectures or ['none'])}")
         base_path = self.install_context.staging / f'rust-{self.target_name}'
         self.do_rust_install(self.base_package, base_path)
