@@ -952,6 +952,7 @@ class RustInstallable(Installable):
 
     def stage(self) -> None:
         self.install_context.clean_staging()
+        
         arch_std_prefix = f'rust-std-{self.target_name}-'
         suffix = '.tar.gz'
         architectures = [artifact[len(arch_std_prefix):-len(suffix)] for artifact in
